@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zampe in Armonia</title>
+    <link rel="icon" type="image/x-icon" href="logo.ico">
     <style>
         * {
             margin: 0;
@@ -46,6 +47,15 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 100%;
+            object-position: center;
         }
 
         .nav-links {
@@ -83,6 +93,22 @@
             box-shadow: 0 10px 25px rgba(44, 95, 65, 0.3);
         }
 
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #2c5f41;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -91,6 +117,7 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+            padding-top: 100px; /* Add padding to account for fixed header */
         }
 
         .hero::before {
@@ -439,17 +466,65 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 300px;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                margin: 1rem 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+                z-index: 1001;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .hero {
+                padding-top: 120px; /* Increase padding for mobile */
+                min-height: calc(100vh - 60px);
             }
 
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
                 gap: 2rem;
+                padding: 0 1rem;
             }
 
             .hero-text h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                line-height: 1.3;
+            }
+
+            .hero-text p {
+                font-size: 1.1rem;
             }
 
             .about-content {
@@ -463,11 +538,68 @@
 
             .hero-buttons {
                 justify-content: center;
+                flex-wrap: wrap;
             }
 
             .hero-graphic {
-                width: 300px;
-                height: 300px;
+                width: 280px;
+                height: 280px;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .logo img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .about-text h2 {
+                font-size: 2rem;
+            }
+
+            .booking h2 {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            nav {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .cta-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.8rem;
+            }
+
+            .hero-graphic {
+                width: 240px;
+                height: 240px;
             }
         }
 
@@ -488,7 +620,8 @@
     <header>
         <nav>
             <div class="logo">
-                🐕 Zampe in Armonia 
+                <img src="logo.jpg" alt="Zampe in Armonia Logo" onerror="this.style.display='none'">
+                Zampe in Armonia 
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
@@ -496,6 +629,11 @@
                 <li><a href="#about">Info</a></li>
                 <li><a href="#contact">Contatti</a></li>
             </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <a href="#booking" class="cta-button">Prenota Consulenza</a>
         </nav>
     </header>
@@ -628,7 +766,6 @@
                         <button type="submit" class="cta-button" style="width: 100%; margin-top: 1rem; font-size: 1.1rem;">Prenota consulenza</button>
                     </form>
 
-
                     <script>
                         document.getElementById("bookingForm").addEventListener("submit", function(e) {
                             e.preventDefault();
@@ -681,8 +818,30 @@
     </footer>
 
     <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
 
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
 
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
