@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -995,11 +995,17 @@
                             e.preventDefault();
                             const form = e.target;
 
-                            alert("Invio della richiesta in corso... attendi conferma tramite email.");
-
                             fetch(form.action, {
                                 method: "POST",
                                 body: new FormData(form)
+                            }).then(response => {
+                                if (response.ok) {
+                                    alert("Prenotazione inviata con successo! La contatteremo al più presto.");
+                                } else {
+                                    alert("Si è verificato un errore. Riprova più tardi.");
+                                }
+                            }).catch(() => {
+                                alert("Si è verificato un errore. Riprova più tardi.");
                             });
 
                             form.reset();
