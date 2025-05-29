@@ -230,6 +230,10 @@
             gap: 2rem;
         }
 
+        .about-image.mobile-inline {
+            display: none;
+        }
+
         .service-card {
             background: white;
             padding: 2rem;
@@ -587,6 +591,14 @@
             .nav-links.active {
                 right: 0;
             }
+            .about-content .about-image {
+                display: none; /* hide original one */
+            }
+            .about-image.mobile-inline {
+                display: block;
+                height: 400px;
+                margin-top: 0;
+            }
 
             .nav-links a {
                 font-size: 1.4rem;
@@ -708,7 +720,7 @@
             .about-text h2 {
                 font-size: 2.2rem;
                 text-align: center;
-                margin-bottom: 2rem;
+                margin-bottom: 0.5rem;
             }
 
             .about-text p {
@@ -875,6 +887,15 @@
                 font-size: 1.1rem;
             }
 
+            .about-content .about-image {
+                display: none; /* hide original one */
+            }
+            .about-image.mobile-inline {
+                display: block;
+                margin-bottom: 2rem;
+                height: 300px;
+            }
+
             .hero-graphic {
                 width: 250px;
                 height: 250px;
@@ -1037,26 +1058,37 @@
 
     <section id="about" class="about">
         <div class="container">
+ 
             <div class="about-content fade-in">
-                <div class="about-text">
-                    <h2>Mi presento</h2>
-                    <p>Ciao! Mi chiamo Erica Greco. La mia missione è aiutare cani e proprietari a vivere insieme in armonia, costruendo una relazione basata su fiducia, rispetto e comunicazione.</p>
-                    <p>Adotto un approccio gentile, personalizzando ogni percorso in base al cane e alla sua famiglia, promuovendo il benessere del cane e una crescita condivisa con il proprietario.</p>
-                    <div class="credentials">
-                        <h4>Certificazioni e esperienze</h4>
-                        <ul>
-                            <li>✓ Certified Professional Dog Trainer (CPDT-KA)</li>
-                            <li>✓ Fear Free Certified Professional</li>
-                            <li>✓ 500+ successful behavior modification cases</li>
-                            <li>✓ Specialized in aggression and anxiety disorders</li>
-                            <li>✓ Continuing education in canine psychology</li>
-                        </ul>
+                    <div class="about-text">
+                        <h2>Mi presento</h2>
+
+                        <!-- Image moved here for mobile layout -->
+                        <div class="about-image mobile-inline">
+                            <img src="https://d92mrp7hetgfk.cloudfront.net/images/sites/H2B/dog-trainer/original.jpg?1532640539" alt="Dog Trainer" loading="lazy">
+                        </div>
+
+                        <p>Ciao! Mi chiamo Erica Greco. La mia missione è aiutare cani e proprietari a vivere insieme in armonia, costruendo una relazione basata su fiducia, rispetto e comunicazione.</p>
+                        <p>Adotto un approccio gentile, personalizzando ogni percorso in base al cane e alla sua famiglia, promuovendo il benessere del cane e una crescita condivisa con il proprietario.</p>
+                        <div class="credentials">
+                            <h4>Certificazioni e esperienze</h4>
+                            <ul>
+                                <li>✓ Certified Professional Dog Trainer (CPDT-KA)</li>
+                                <li>✓ Fear Free Certified Professional</li>
+                                <li>✓ 500+ successful behavior modification cases</li>
+                                <li>✓ Specialized in aggression and anxiety disorders</li>
+                                <li>✓ Continuing education in canine psychology</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Desktop image only -->
+                    <div class="about-image desktop-only">
+                        <img src="https://d92mrp7hetgfk.cloudfront.net/images/sites/H2B/dog-trainer/original.jpg?1532640539" alt="Dog Trainer" loading="lazy">
                     </div>
                 </div>
-                <div class="about-image">
-                    <img src="https://d92mrp7hetgfk.cloudfront.net/images/sites/H2B/dog-trainer/original.jpg?1532640539" alt="Dog Trainer" loading="lazy">
-                </div>
             </div>
+
         </div>
     </section>
 
@@ -1139,7 +1171,7 @@
                     <h3>Informazioni di contatto</h3>
                     <div class="contact-info">
                         <p>📞 (+39) 1111111111</p>
-                        <p>✉️ prova@zampeinarmonia.com</p>
+                        <p>✉️ ericagreco.dogs@gmail.com</p>
                         <p>📍 Via Finta 27, Milano, MI 20121</p>
                         <p>🕒 Lun-Sab: 8-18</p>
                         
